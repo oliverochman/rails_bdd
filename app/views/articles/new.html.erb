@@ -1,1 +1,14 @@
-<h1>Create an article</h1>
+<%= form_with url: articles_path, scope: :article, local: true do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title, placeholder: 'Title' %><br>
+  </p>
+  <p>
+    <%= form.label :text %><br>
+    <%= form.text_field :content, placeholder: 'Content' %><br>
+  </p>
+  <p>
+    <%= form.submit value: "Create Article"%>
+  </p>
+
+<% end %>
