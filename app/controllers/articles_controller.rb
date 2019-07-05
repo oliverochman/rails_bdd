@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
@@ -6,20 +8,19 @@ class ArticlesController < ApplicationController
   def new
     @article = Article.new
   end
-  
+
   def create
-    @article = Article.new(article_params)
-    if @article.save
-      redirect_to @article
+    @article = Article.create(article_params)
+    if @article.persisted?
+      redirect_to articles_path(@article)
     else
-      
-      binding.pry
       flash[:alert] = @article.errors.full_messages.to_sentence
-      render :new 
+      render :new
     end
   end
 
   private
+
   def article_params
     params.require(:article).permit(:title, :content, :author)
   end
